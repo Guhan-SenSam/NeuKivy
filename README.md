@@ -1,6 +1,6 @@
 # NeuKivy
 
-
+![demo](https://github.com/Guhan-SenSam/NeuKivy/blob/main/images/demo.png)
 
 Neukivy is a collection of neumorphic widgets built of kivy. The library is currently in its initial development so there isn't much yet. But hopefully it will grow into a library you can use to easily create neumorphic UI in python.
 
