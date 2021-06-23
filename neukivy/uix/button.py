@@ -2,7 +2,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.lang import Builder
 from kivy.properties import ListProperty, NumericProperty
-from neukivy.uix.behaviors.neumorph import NeuMorphRoundedRectangle
+from neukivy.uix.behaviors.neumorph import NeuMorphRoundedRectangleEmboss
 from neukivy.uix.behaviors.neubuttonbehavior import NeuButtonBehavior
 from neukivy.app import ThemeableBehavior
 from kivy.clock import Clock
@@ -24,12 +24,11 @@ Builder.load_string(
             pos:self.dark_shadow_pos
             texture:self.dark_shadow
     canvas:
-        Color:
-            rgba:self.comp_color
         RoundedRectangle:
             size:self.size
             pos:self.pos
             radius:self.radius,self.radius,self.radius,self.radius
+            texture:self.outline
     size:400,100
     size_hint:None,None
 
@@ -61,7 +60,7 @@ Builder.load_string(
 
 
 class NeuButton(
-    NeuButtonBehavior, AnchorLayout, NeuMorphRoundedRectangle, ThemeableBehavior
+    NeuButtonBehavior, AnchorLayout, NeuMorphRoundedRectangleEmboss, ThemeableBehavior
 ):
 
     comp_color = ListProperty([0, 0, 0, 0])

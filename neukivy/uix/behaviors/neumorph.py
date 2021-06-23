@@ -117,6 +117,8 @@ class NeuMorphRoundedRectangleEmboss:
     light_shadow_pos = ListProperty([0, 0])
     light_shadow_size = ListProperty([0, 0])
 
+    outline = ObjectProperty(None)
+
     increment = NumericProperty(0)
     elevation = NumericProperty(0)
     elevation_data = {
@@ -141,49 +143,75 @@ class NeuMorphRoundedRectangleEmboss:
             self.light_shadow = self.blank_texture
             return
         self.increment = self.pixel_depth / 2.5
+        # Create widget outline
+        self.outline = self.widget_outline(
+            self.width, self.height, self.pixel_depth, dec_2_rgb(self.comp_color)
+        )
         # Create dark_shadow
         self.dark_shadow = self._inner_shadow_gen(
             self.width, self.height, self.pixel_depth, dec_2_rgb(self.dark_color)
         )
         self.dark_shadow_size = (
-            self.width,
-            self.height,
+            self.width + self.pixel_depth,
+            self.height + self.pixel_depth,
         )
         self.dark_shadow_pos = (
-            self.x + self.increment,
-            self.y - self.increment,
+            self.x - self.pixel_depth / 2 + self.increment / 2,
+            self.y - self.pixel_depth / 2 - self.increment / 2,
         )
-        # # Create light shadow
-        # self.light_shadow = self._outer_shadow_gen(
-        #     self.width, self.height, self.pixel_depth, dec_2_rgb(self.light_color)
-        # )
-        # self.light_shadow_size = (
-        #     self.width + self.pixel_depth,
-        #     self.height + self.pixel_depth,
-        # )
-        # self.light_shadow_pos = (
-        #     self.x - self.pixel_depth / 2 - self.increment,
-        #     self.y - self.increment,
-        # )
+        # Create light shadow
+        self.light_shadow = self._inner_shadow_gen(
+            self.width, self.height, self.pixel_depth, dec_2_rgb(self.light_color)
+        )
+        self.light_shadow_size = (
+            self.width + self.pixel_depth,
+            self.height + self.pixel_depth,
+        )
+        self.light_shadow_pos = (
+            self.x - self.pixel_depth / 2 - self.increment / 2,
+            self.y - self.pixel_depth / 2 + self.increment / 2,
+        )
 
-    def _inner_shadow_gen(self, size_x, size_y, pixel_depth, color):
+    def widget_outline(self, size_x, size_y, pixel_depth, color):
         # Create blank Image
-        shadow = Image.new(
+        outline = Image.new(
             "RGBA",
             (size_x, size_y),
-            color=(tuple(dec_2_rgb(self.theme_manager.bg_color))),
+            color=tuple(dec_2_rgb(self.bg_color)),
         )
-        blank_draw = ImageDraw.Draw(shadow)
+        blank_draw = ImageDraw.Draw(outline)
         x0, y0 = 0, 0
         x1, y1 = x0 + size_x, y0 + size_y
         blank_draw.rounded_rectangle(
             [(x0, y0), (x1, y1)],
             radius=self.radius,
-            outline=tuple(dec_2_rgb(self.dark_color)),
-            width=abs(int(self.pixel_depth / 2)),
+            outline=tuple(color),
+            width=10,
         )
-        shadow = shadow.filter(ImageFilter.GaussianBlur(self.increment))
         texture = Texture.create(size=(size_x, size_y), colorfmt="rgba")
+        texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
+        return texture
+
+    def _inner_shadow_gen(self, size_x, size_y, pixel_depth, color):
+        # Create blank Image
+        blank_x_size = int(size_x + pixel_depth)
+        blank_y_size = int(size_y + pixel_depth)
+        shadow = Image.new(
+            "RGBA",
+            (blank_x_size, blank_y_size),
+            color=(50, 50, 50, 0),
+        )
+        blank_draw = ImageDraw.Draw(shadow)
+        x0, y0 = (blank_x_size - size_x) / 2.0, (blank_y_size - size_y) / 2.0
+        x1, y1 = size_x + self.pixel_depth / 2, size_y + self.pixel_depth / 2
+        blank_draw.rounded_rectangle(
+            [(x0, y0), (x1, y1)],
+            radius=self.radius,
+            outline=tuple(color),
+            width=(int(self.increment)),
+        )
+        shadow = shadow.filter(ImageFilter.GaussianBlur(self.increment / 2))
+        texture = Texture.create(size=(blank_x_size, blank_y_size), colorfmt="rgba")
         texture.blit_buffer(shadow.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
         return texture
 
