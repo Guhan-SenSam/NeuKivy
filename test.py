@@ -13,9 +13,19 @@ Screen:
 
     NeuButtonRounded:
         id:button
-        pos_hint:{'center_x':.5,'center_y':.5}
+        pos_hint:{'center_x':.7,'center_y':.5}
         text:'NeuKivy'
         text_color:.9,.4,.6,1
+        size:200,200
+
+    NeuButtonRounded:
+        id:button
+        pos_hint:{'center_x':.3,'center_y':.5}
+        text:'NeuKivy'
+        text_color:.9,.4,.6,1
+        size:200,200
+        down_elevation:-3
+        up_elevation:-2
 
 """
 
