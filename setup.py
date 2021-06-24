@@ -1,10 +1,11 @@
 from setuptools import find_packages, setup
+print(find_packages(include=["neukivy", "neukivy.*"]))
 setup(
     name='NeuKivy',
     url='https://github.com/Guhan-SenSam/NeuKivy',
     author='Guhan SenSam',
     author_email='infinium.software.2021@gmail.com',
-    packages=find_packages(include=["neukivy", "neukivy.*", "neukivy.uix.behaviors"]),
+    packages=find_packages(include=["neukivy",  "neukivy.uix.behaviors.*", "neukivy.*"]),
     package_dir={"neukivy": "neukivy"},
     package_data={
             "neukivy": ["fonts/*.ttf"]
@@ -14,5 +15,3 @@ setup(
     license='MIT',
     description='A collection of neumorphic widgets built with kivy'
 )
-
-print(find_packages(include=["neukivy", "neukivy.*"]))
