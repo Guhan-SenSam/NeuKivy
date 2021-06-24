@@ -5,6 +5,7 @@ setup(
     author='Guhan SenSam',
     author_email='infinium.software.2021@gmail.com',
     packages=find_packages(include=["neukivy", "neukivy.*"]),
+    package_dir={"kivymd": "kivymd"},
     package_data={
             "neukivy": ["fonts/*.ttf"]
         },
