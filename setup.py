@@ -1,5 +1,4 @@
 from setuptools import find_packages, setup
-print(find_packages(include=["neukivy", "neukivy.*"])
 setup(
     name='NeuKivy',
     url='https://github.com/Guhan-SenSam/NeuKivy',
@@ -15,3 +14,4 @@ setup(
     license='MIT',
     description='A collection of neumorphic widgets built with kivy'
 )
+print(find_packages(include=["neukivy", "neukivy.*"])
