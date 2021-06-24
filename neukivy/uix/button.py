@@ -8,8 +8,13 @@ from kivy.properties import (
     ColorProperty,
     BooleanProperty,
 )
-from neukivy.uix.behaviors.neumorph import NeuMorphRectangle, NeuMorphRoundedRectangle
+from neukivy.uix.behaviors.neumorph import (
+    NeuMorphRectangle,
+    NeuMorphRoundedRectangle,
+    NeuMorphCircular,
+)
 from neukivy.uix.behaviors.neubuttonbehavior import NeuButtonBehavior
+from neukivy.uix.behaviors.iconbehavior import IconBehavior
 from neukivy.app import ThemeableBehavior
 
 Builder.load_string(
@@ -68,7 +73,48 @@ Builder.load_string(
             texture:self.outline_texture if self.elevation and self.elevation < 0 else None
         Color:
 
+<NeuButtonCircular>:
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+        Ellipse:
+            size:self.radius,self.radius
+            pos:self.pos
+            texture:self.outline_texture if self.elevation and self.elevation < 0 else None
+        Color:
+    size:self.radius,self.radius
 
+<NeuIconButton>:
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+        Rectangle:
+            size:self.size
+            pos:self.pos
+            texture:self.outline_texture if self.elevation and self.elevation < 0 else None
+        Color:
+
+<NeuIconButtonRounded>:
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius:self.radius,self.radius,self.radius,self.radius
+            texture:self.outline_texture if self.elevation and self.elevation < 0 else None
+        Color:
+
+<NeuIconButtonCircular>:
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+        Ellipse:
+            size:self.radius,self.radius
+            pos:self.pos
+            texture:self.outline_texture if self.elevation and self.elevation < 0 else None
+        Color:
+    size:self.radius,self.radius
 
 """
 )
@@ -127,9 +173,6 @@ class BaseButton(NeuButtonBehavior, AnchorLayout, ThemeableBehavior):
     and defaults to `False`.
     """
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
 
 class NeuButton(BaseButton, NeuMorphRectangle):
 
@@ -139,18 +182,8 @@ class NeuButton(BaseButton, NeuMorphRectangle):
 
     light_color = ListProperty([0, 0, 0, 0])
 
-    up_elevation = NumericProperty(3)
 
-    down_elevation = NumericProperty(1)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-
-class NeuButtonRounded(
-    BaseButton,
-    NeuMorphRoundedRectangle,
-):
+class NeuButtonRounded(BaseButton, NeuMorphRoundedRectangle):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -159,11 +192,81 @@ class NeuButtonRounded(
     light_color = ListProperty([0, 0, 0, 0])
 
     radius = NumericProperty(20)
+    """
+    Radius of the corners
+    """
 
-    up_elevation = NumericProperty(3)
 
-    down_elevation = NumericProperty(1)
+class NeuButtonCircular(BaseButton, NeuMorphCircular):
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        print(self.text)
+    comp_color = ListProperty([0, 0, 0, 0])
+
+    dark_color = ListProperty([0, 0, 0, 0])
+
+    light_color = ListProperty([0, 0, 0, 0])
+
+    radius = NumericProperty(100)
+    """
+    Radius of the button
+    """
+
+
+class NeuIconButton(BaseButton, NeuMorphRectangle, IconBehavior):
+
+    comp_color = ListProperty([0, 0, 0, 0])
+
+    dark_color = ListProperty([0, 0, 0, 0])
+
+    light_color = ListProperty([0, 0, 0, 0])
+
+    font_name = StringProperty("Icons")
+    """
+    Name of the font used for icon definitions.
+
+    attr:`font_name` is an :class:`~kivy.properties.StringProperty`
+    and defaults to `"Icons"`.
+    """
+
+
+class NeuIconButtonRounded(BaseButton, NeuMorphRoundedRectangle, IconBehavior):
+
+    comp_color = ListProperty([0, 0, 0, 0])
+
+    dark_color = ListProperty([0, 0, 0, 0])
+
+    light_color = ListProperty([0, 0, 0, 0])
+
+    radius = NumericProperty(20)
+    """
+    Radius of the corners
+    """
+
+    font_name = StringProperty("Icons")
+    """
+    Name of the font used for icon definitions.
+
+    attr:`font_name` is an :class:`~kivy.properties.StringProperty`
+    and defaults to `"Icons"`.
+    """
+
+
+class NeuIconButtonCircular(BaseButton, NeuMorphCircular, IconBehavior):
+
+    comp_color = ListProperty([0, 0, 0, 0])
+
+    dark_color = ListProperty([0, 0, 0, 0])
+
+    light_color = ListProperty([0, 0, 0, 0])
+
+    radius = NumericProperty(100)
+    """
+    Radius of the button
+    """
+
+    font_name = StringProperty("Icons")
+    """
+    Name of the font used for icon definitions.
+
+    attr:`font_name` is an :class:`~kivy.properties.StringProperty`
+    and defaults to `"Icons"`.
+    """

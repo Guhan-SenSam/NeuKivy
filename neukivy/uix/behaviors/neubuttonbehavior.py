@@ -52,6 +52,14 @@ class NeuButtonBehavior:
     and defaults to `1`.
     """
 
+    disabled = BooleanProperty(False)
+    """
+    Whether the widget has been disabled or not
+
+    attr:`disabled` is an :class:`~kivy.properties.BooleanProperty`
+    and defaults to `False`.
+    """
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Clock.schedule_once(self.elevation_setter, 0)
@@ -60,7 +68,7 @@ class NeuButtonBehavior:
         self.elevation = self.up_elevation
 
     def on_touch_down(self, touch):
-        if self.collide_point(*touch.pos):
+        if self.collide_point(*touch.pos) and not self.disabled:
             self.pressed = True
             self.elevation = self.down_elevation
             if "label" in self.ids and self.do_text_shrink:
@@ -69,7 +77,7 @@ class NeuButtonBehavior:
                 )
 
     def on_touch_up(self, touch):
-        if self.pressed:
+        if self.pressed and not self.disabled:
             self.elevation = self.up_elevation
             self.pressed = False
             if "label" in self.ids and self.do_text_shrink:

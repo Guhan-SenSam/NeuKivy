@@ -48,6 +48,15 @@ class Theme_Manger(EventDispatcher):
     and defaults to `[0,0,0,0]`.
     """
 
+    primary_color = ColorProperty([0, 0, 0, 0])
+    """
+    The primary color of your app. Will be used in various parts of the ui to add
+    contrast
+
+    attr:`primary_color` is an :class:`~kivy.properties.ColorProperty`
+    and defaults to `[0,0,0,0]`.
+    """
+
     text_color = ColorProperty([1, 1, 1, 1])
     """
     Color of text used in the app.
@@ -56,10 +65,21 @@ class Theme_Manger(EventDispatcher):
     and defaults to `[1,1,1,1]`.
     """
 
+    disabled_text_color = ColorProperty([0.2, 0.2, 0.2, 1])
+    """
+    Color of text if a widget has been disabled
+
+    attr:`disabled_text_color` is an :class:`~kivy.properties.ColorProperty`
+    and defaults to `[0.2, 0.2, 0.2, 1]`.
+    """
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
     def on_bg_color(self, *args):
         if len(self.bg_color) > 3:
             Logger.info(
-                "NeuKivy:App 'bg_color' alpha channel cannot be set. Ignoring provided alpha channel value"
+                "NeuKivy:'bg_color' alpha channel cannot be set. Ignoring provided alpha channel value"
             )
         self._bg_color_noalp = [self.bg_color[0], self.bg_color[1], self.bg_color[2], 0]
         self._bg_color_alp = [self.bg_color[0], self.bg_color[1], self.bg_color[2], 1]
