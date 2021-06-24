@@ -1,10 +1,10 @@
 from setuptools import find_packages, setup
+print(find_packages(include=["neukivy", "neukivy.*"])
 setup(
     name='NeuKivy',
     url='https://github.com/Guhan-SenSam/NeuKivy',
     author='Guhan SenSam',
     author_email='infinium.software.2021@gmail.com',
-    print(find_packages(include=["neukivy", "neukivy.*"])
     packages=find_packages(include=["neukivy", "neukivy.*", "neukivy.uix.behaviors"]),
     package_dir={"neukivy": "neukivy"},
     package_data={
