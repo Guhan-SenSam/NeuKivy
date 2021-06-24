@@ -4,7 +4,7 @@ setup(
     url='https://github.com/Guhan-SenSam/NeuKivy',
     author='Guhan SenSam',
     author_email='infinium.software.2021@gmail.com',
-    packages=find_packages(include=["neukivy", "neukivy.*", "neukivy.*.*"]),
+    packages=find_packages(include=["neukivy", "neukivy.*", "neukivy.uix.behaviors"]),
     package_dir={"neukivy": "neukivy"},
     package_data={
             "neukivy": ["fonts/*.ttf"]
