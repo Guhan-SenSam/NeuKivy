@@ -10,14 +10,12 @@ Screen:
         Rectangle:
             size:self.size
             pos:self.pos
-
     NeuIconButtonCircular:
         id:button
         pos_hint:{'center_x':.7,'center_y':.5}
         size:100,100
         icon:'account-alert'
         font_size:'40sp'
-
     NeuButtonCircular:
         pos_hint:{'center_x':.3,'center_y':.5}
         text:'NeuKivy'
@@ -25,7 +23,6 @@ Screen:
         down_elevation:1
         up_elevation:3
         font_size:'20sp'
-
 """
 
 
@@ -34,7 +31,7 @@ class MainApp(NeuApp):
         kv = Builder.load_string(kv_string)
         # Set the app colors at start.
         # The bg_color property should not have an alpha value. This is auto computed
-        self.theme_manager.bg_color = (0.2, 0.2, 0.2, 0.1)
+        self.theme_manager.bg_color = (0.2, 0.2, 0.2)
         # Set this to a lighter shade of your bg_color
         self.theme_manager.light_color = (0.3, 0.3, 0.3, 1)
         # Set this to a darker shade of your bg_color

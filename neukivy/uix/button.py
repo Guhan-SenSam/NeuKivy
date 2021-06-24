@@ -20,7 +20,7 @@ from neukivy.app import ThemeableBehavior
 Builder.load_string(
     """
 
-<BaseButton>:
+<NeuBaseButton>:
     canvas.before:
         Clear
         Color:
@@ -120,7 +120,7 @@ Builder.load_string(
 )
 
 
-class BaseButton(NeuButtonBehavior, AnchorLayout, ThemeableBehavior):
+class NeuBaseButton(NeuButtonBehavior, AnchorLayout, ThemeableBehavior):
 
     text = StringProperty()
     """
@@ -174,7 +174,7 @@ class BaseButton(NeuButtonBehavior, AnchorLayout, ThemeableBehavior):
     """
 
 
-class NeuButton(BaseButton, NeuMorphRectangle):
+class NeuButton(NeuBaseButton, NeuMorphRectangle):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -183,7 +183,7 @@ class NeuButton(BaseButton, NeuMorphRectangle):
     light_color = ListProperty([0, 0, 0, 0])
 
 
-class NeuButtonRounded(BaseButton, NeuMorphRoundedRectangle):
+class NeuButtonRounded(NeuBaseButton, NeuMorphRoundedRectangle):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -197,7 +197,7 @@ class NeuButtonRounded(BaseButton, NeuMorphRoundedRectangle):
     """
 
 
-class NeuButtonCircular(BaseButton, NeuMorphCircular):
+class NeuButtonCircular(NeuBaseButton, NeuMorphCircular):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -210,8 +210,11 @@ class NeuButtonCircular(BaseButton, NeuMorphCircular):
     Radius of the button
     """
 
+    def on_size(self, *args):
+        self.size = self.radius, self.radius
 
-class NeuIconButton(BaseButton, NeuMorphRectangle, IconBehavior):
+
+class NeuIconButton(NeuBaseButton, NeuMorphRectangle, IconBehavior):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -228,7 +231,7 @@ class NeuIconButton(BaseButton, NeuMorphRectangle, IconBehavior):
     """
 
 
-class NeuIconButtonRounded(BaseButton, NeuMorphRoundedRectangle, IconBehavior):
+class NeuIconButtonRounded(NeuBaseButton, NeuMorphRoundedRectangle, IconBehavior):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -250,7 +253,7 @@ class NeuIconButtonRounded(BaseButton, NeuMorphRoundedRectangle, IconBehavior):
     """
 
 
-class NeuIconButtonCircular(BaseButton, NeuMorphCircular, IconBehavior):
+class NeuIconButtonCircular(NeuBaseButton, NeuMorphCircular, IconBehavior):
 
     comp_color = ListProperty([0, 0, 0, 0])
 

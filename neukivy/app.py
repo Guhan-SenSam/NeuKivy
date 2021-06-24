@@ -1,13 +1,15 @@
 from kivy.app import App
 from kivy.logger import Logger
-from kivy.properties import ObjectProperty, ListProperty, ColorProperty
+from kivy.properties import ObjectProperty, ListProperty, ColorProperty, BooleanProperty
 from kivy.event import EventDispatcher
 from kivy.clock import Clock
+from neukivy.kivymdconfig import factory_register
+import pip
 
 
 class Theme_Manger(EventDispatcher):
 
-    bg_color = ColorProperty([0, 0, 0])
+    bg_color = ListProperty([0, 0, 0])
     """
     Background Color of the app. Only RGB channels to be defined.
     The alpha channel is determined internally for each component.
@@ -124,6 +126,38 @@ class NeuApp(App):
     used for that widget alone
     """
 
+    use_kivymd = BooleanProperty(False)
+    """
+    If set to `True` you can use KivyMD widgets inside NeuKivy. This is useful as the entire ui
+    of an app cannot consist of neumorphic widgets. This property enables you to use material
+    design widgets provided in KivyMD.
+    Check KivyMD documentation here
+    (https://kivymd.readthedocs.io/en/latest/)
+    """
+
+    theme_cls = ObjectProperty()
+    """
+    This property is used in order to allow KivyMD widgets to work within NeuKivy.
+    It allows you to access all the color definitions and theme support available
+    inside KivyMD. Remember `theme_manager` is used to set colors for all NeuKivy widgets
+    whereas the colors for KivyMD widgets are controlled by the `theme_cls`.
+    """
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.theme_manager = Theme_Manger()
+
+    def on_use_kivymd(self, *args):
+        if self.use_kivymd:
+            # Check to see if kivymd is installed
+            try:
+                import kivymd
+            except ImportError:
+
+                raise ImportError(
+                    """Please install kivymd before using it in your application"""
+                )
+            factory_register()
+            from kivymd.theming import ThemeManager
+
+            self.theme_cls = ThemeManager()
