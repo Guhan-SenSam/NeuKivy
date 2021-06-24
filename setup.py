@@ -14,4 +14,5 @@ setup(
     license='MIT',
     description='A collection of neumorphic widgets built with kivy'
 )
-print(find_packages(include=["neukivy", "neukivy.*"])
+
+print(find_packages(include=["neukivy", "neukivy.*"]))
