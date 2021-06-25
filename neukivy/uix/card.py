@@ -1,3 +1,4 @@
+from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.properties import ListProperty, NumericProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -38,7 +39,7 @@ Builder.load_string(
 )
 
 
-class NeuCard(BoxLayout,ThemeableBehavior,NeuMorphRoundedRectangle):
+class NeuCard(ThemeableBehavior,NeuMorphRoundedRectangle,BoxLayout):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -54,6 +55,22 @@ class NeuCard(BoxLayout,ThemeableBehavior,NeuMorphRoundedRectangle):
     and defaults to `'20dp'`.
     """
 
+    elevation = NumericProperty(None)
+    """
+    Elevation of the widget.Elevation can be any number between -5 and +5(inclusive).
+    Negative elevation will cause the widget to go into the screen whereas positive
+    elevation will make it pop from the screen
+
+    This widget has a default elevation of 3
+    """
+
+
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.elevation = 2
+        Clock.schedule_once(lambda x: self.set_elevation(self.elevation))
+
+    def set_elevation(self, value):
+        if value is None:
+            self.elev = 3
+        else:
+            self.elev = value

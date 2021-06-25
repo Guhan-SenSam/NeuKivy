@@ -98,11 +98,11 @@ Builder.load_string(
 <NeuButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         Rectangle:
             size:self.size
             pos:self.pos
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
     size:100,100
     size_hint:None,None
@@ -110,76 +110,76 @@ Builder.load_string(
 <NeuRoundedButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         RoundedRectangle:
             size:self.size
             pos:self.pos
             radius:self.radius,self.radius,self.radius,self.radius
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
 
 <NeuCircularButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         Ellipse:
             size:self.radius,self.radius
             pos:self.pos
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
     size:self.radius,self.radius
 
 <NeuIconButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         Rectangle:
             size:self.size
             pos:self.pos
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
 
 <NeuRoundedIconButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         RoundedRectangle:
             size:self.size
             pos:self.pos
             radius:self.radius,self.radius,self.radius,self.radius
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
 
 <NeuCircularIconButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         Ellipse:
             size:self.radius,self.radius
             pos:self.pos
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
     size:self.radius,self.radius
 
 <NeuIconTextButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         Rectangle:
             size:self.size
             pos:self.pos
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
 
 <NeuRoundedIconTextButton>:
     canvas.before:
         Color:
-            rgba:(1,1,1,1) if self.elevation and self.elevation < 0 else self.comp_color
+            rgba:(1,1,1,1) if self.elev and self.elev < 0 else self.comp_color
         RoundedRectangle:
             size:self.size
             pos:self.pos
             radius:self.radius,self.radius,self.radius,self.radius
-            texture:self.border_texture if self.elevation and self.elevation < 0 else None
+            texture:self.border_texture if self.elev and self.elev < 0 else None
         Color:
 
 
@@ -365,7 +365,7 @@ class NeuButton(NeuBaseButton, NeuMorphRectangle):
     light_color = ListProperty([0, 0, 0, 0])
 
 
-class RoundedNeuButton(NeuBaseButton, NeuMorphRoundedRectangle):
+class NeuRoundedButton(NeuBaseButton, NeuMorphRoundedRectangle):
 
     comp_color = ListProperty([0, 0, 0, 0])
 

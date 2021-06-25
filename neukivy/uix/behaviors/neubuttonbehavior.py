@@ -1,5 +1,5 @@
-from kivy.properties import NumericProperty, BooleanProperty
 from kivy.clock import Clock
+from kivy.properties import BooleanProperty, NumericProperty
 
 
 class NeuButtonBehavior:
@@ -65,12 +65,12 @@ class NeuButtonBehavior:
         Clock.schedule_once(self.elevation_setter, 0)
 
     def elevation_setter(self, *args):
-        self.elevation = self.up_elevation
+        self.elev = self.up_elevation
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.disabled:
             self.pressed = True
-            self.elevation = self.down_elevation
+            self.elev = self.down_elevation
             if "label" in self.ids and self.do_text_shrink:
                 self.ids.label.font_size = (
                     self.ids.label.font_size - self.text_shrink_amount
@@ -78,7 +78,7 @@ class NeuButtonBehavior:
 
     def on_touch_up(self, touch):
         if self.pressed and not self.disabled:
-            self.elevation = self.up_elevation
+            self.elev = self.up_elevation
             self.pressed = False
             if "label" in self.ids and self.do_text_shrink:
                 self.ids.label.font_size = (

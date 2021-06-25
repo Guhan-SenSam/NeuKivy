@@ -85,7 +85,7 @@ class NeuMorphRectangle:
     Value to be used for blurring the shadow and shifting to them the correct location.
     You can change this value but it may ruin the neumorphic aesthetic of a widget.
     """
-    elevation = NumericProperty(0)
+    elev = NumericProperty(0)
     """
     Elevation of the widget. This can be any value from -5 to 5 including both -5 and 5.
     It is possible to calculate shadows for other elevations but the neumorphic effect breaks
@@ -123,7 +123,7 @@ class NeuMorphRectangle:
             self.dark_shadow = self.blank_texture
             self.light_shadow = self.blank_texture
             return
-        if self.elevation > 0:
+        if self.elev > 0:
             self.increment = self.pixel_depth / 2.5
             # Create dark_shadow
             self.dark_shadow = self._outer_shadow_gen(
@@ -255,7 +255,7 @@ class NeuMorphRectangle:
 
     def on_elevation(self, instance, value):
         if abs(value) > 5:
-            raise ValueError("Elvation must be between 5 and -5(inclusive)")
+            raise ValueError("Elevation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()
 
@@ -347,7 +347,7 @@ class NeuMorphRoundedRectangle:
     Value to be used for blurring the shadow and shifting to them the correct location.
     You can change this value but it may ruin the neumorphic aesthetic of a widget.
     """
-    elevation = NumericProperty(None)
+    elev = NumericProperty(None)
     """
     Elevation of the widget. This can be any value from -5 to 5 including both -5 and 5.
     It is possible to calculate shadows for other elevations but the neumorphic effect breaks
@@ -385,7 +385,7 @@ class NeuMorphRoundedRectangle:
             self.dark_shadow = self.blank_texture
             self.light_shadow = self.blank_texture
             return
-        if self.elevation > 0:
+        if self.elev > 0:
             self.increment = self.pixel_depth / 2.5
             # Create dark_shadow
             self.dark_shadow = self._outer_shadow_gen(
@@ -518,9 +518,9 @@ class NeuMorphRoundedRectangle:
     def on_pos(self, *args, **kwargs):
         self._create_shadow()
 
-    def on_elevation(self, instance, value):
+    def on_elev(self, instance, value):
         if abs(value) > 5:
-            raise ValueError("Elvation must be between 5 and -5(inclusive)")
+            raise ValueError("Elevation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()
 
@@ -612,7 +612,7 @@ class NeuMorphCircular:
     Value to be used for blurring the shadow and shifting to them the correct location.
     You can change this value but it may ruin the neumorphic aesthetic of a widget.
     """
-    elevation = NumericProperty(None)
+    elev = NumericProperty(None)
     """
     Elevation of the widget. This can be any value from -5 to 5 including both -5 and 5.
     It is possible to calculate shadows for other elevations but the neumorphic effect breaks
@@ -650,7 +650,7 @@ class NeuMorphCircular:
             self.dark_shadow = self.blank_texture
             self.light_shadow = self.blank_texture
             return
-        if self.elevation > 0:
+        if self.elev > 0:
             self.increment = self.pixel_depth / 2.5
             # Create dark_shadow
             self.dark_shadow = self._outer_shadow_gen(
@@ -782,7 +782,7 @@ class NeuMorphCircular:
 
     def on_elevation(self, instance, value):
         if abs(value) > 5:
-            raise ValueError("Elvation must be between 5 and -5(inclusive)")
+            raise ValueError("Elevation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()
 
