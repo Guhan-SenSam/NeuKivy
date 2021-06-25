@@ -1,7 +1,7 @@
-from kivy.properties import ObjectProperty, ListProperty, NumericProperty
 from kivy.graphics.texture import Texture
-from PIL import Image, ImageDraw, ImageFilter
+from kivy.properties import ListProperty, NumericProperty, ObjectProperty
 from neukivy.tools.colorconvertor import dec_2_rgb
+from PIL import Image, ImageDraw, ImageFilter
 
 
 class NeuMorphRectangle:
@@ -68,13 +68,13 @@ class NeuMorphRectangle:
     List that contains the size of the light shadow
     """
 
-    outline_texture = ObjectProperty(None)
+    border_texture = ObjectProperty(None)
     """
     Object that holds the texture of the widget;s outline. This only has a texture
     if the elevation is set to negative.
     """
 
-    outline_width = NumericProperty(10)
+    border_width = NumericProperty(10)
     """
     Width of the outline texture in pixels. It defaults to 10 pixels.This property
     is only used if the widget has negative elevation
@@ -85,7 +85,7 @@ class NeuMorphRectangle:
     Value to be used for blurring the shadow and shifting to them the correct location.
     You can change this value but it may ruin the neumorphic aesthetic of a widget.
     """
-    elevation = NumericProperty(None)
+    elevation = NumericProperty(0)
     """
     Elevation of the widget. This can be any value from -5 to 5 including both -5 and 5.
     It is possible to calculate shadows for other elevations but the neumorphic effect breaks
@@ -152,7 +152,7 @@ class NeuMorphRectangle:
         else:
             self.increment = self.pixel_depth / 2.5
             # Create widget outline
-            self.outline_texture = self._widget_outline(
+            self.border_texture = self._widget_outline(
                 self.width, self.height, self.pixel_depth, dec_2_rgb(self.comp_color)
             )
             # Create dark_shadow
@@ -241,7 +241,7 @@ class NeuMorphRectangle:
         blank_draw.rectangle(
             [(x0, y0), (x1, y1)],
             outline=tuple(color),
-            width=self.outline_width,
+            width=self.border_width,
         )
         texture = Texture.create(size=(size_x, size_y), colorfmt="rgba")
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
@@ -254,7 +254,7 @@ class NeuMorphRectangle:
         self._create_shadow()
 
     def on_elevation(self, instance, value):
-        if abs(value) > 6:
+        if abs(value) > 5:
             raise ValueError("Elvation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()
@@ -330,13 +330,13 @@ class NeuMorphRoundedRectangle:
     List that contains the size of the light shadow
     """
 
-    outline_texture = ObjectProperty(None)
+    border_texture = ObjectProperty(None)
     """
     Object that holds the texture of the widget;s outline. This only has a texture
     if the elevation is set to negative.
     """
 
-    outline_width = NumericProperty(10)
+    border_width = NumericProperty(10)
     """
     Width of the outline texture in pixels. It defaults to 10 pixels.This property
     is only used if the widget has negative elevation
@@ -414,7 +414,7 @@ class NeuMorphRoundedRectangle:
         else:
             self.increment = self.pixel_depth / 2.5
             # Create widget outline
-            self.outline_texture = self._widget_outline(
+            self.border_texture = self._widget_outline(
                 self.width, self.height, self.pixel_depth, dec_2_rgb(self.comp_color)
             )
             # Create dark_shadow
@@ -506,7 +506,7 @@ class NeuMorphRoundedRectangle:
             [(x0, y0), (x1, y1)],
             radius=self.radius,
             outline=tuple(color),
-            width=self.outline_width,
+            width=self.border_width,
         )
         texture = Texture.create(size=(size_x, size_y), colorfmt="rgba")
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
@@ -519,7 +519,7 @@ class NeuMorphRoundedRectangle:
         self._create_shadow()
 
     def on_elevation(self, instance, value):
-        if abs(value) > 6:
+        if abs(value) > 5:
             raise ValueError("Elvation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()
@@ -595,13 +595,13 @@ class NeuMorphCircular:
     List that contains the size of the light shadow
     """
 
-    outline_texture = ObjectProperty(None)
+    border_texture = ObjectProperty(None)
     """
     Object that holds the texture of the widget;s outline. This only has a texture
     if the elevation is set to negative.
     """
 
-    outline_width = NumericProperty(10)
+    border_width = NumericProperty(10)
     """
     Width of the outline texture in pixels. It defaults to 10 pixels.This property
     is only used if the widget has negative elevation
@@ -679,7 +679,7 @@ class NeuMorphCircular:
         else:
             self.increment = self.pixel_depth / 2.5
             # Create widget outline
-            self.outline_texture = self._widget_outline(
+            self.border_texture = self._widget_outline(
                 self.width, self.height, self.pixel_depth, dec_2_rgb(self.comp_color)
             )
             # Create dark_shadow
@@ -768,7 +768,7 @@ class NeuMorphCircular:
         blank_draw.ellipse(
             [(x0, y0), (x1, y1)],
             outline=tuple(color),
-            width=self.outline_width,
+            width=self.border_width,
         )
         texture = Texture.create(size=(size_x, size_y), colorfmt="rgba")
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
@@ -781,7 +781,7 @@ class NeuMorphCircular:
         self._create_shadow()
 
     def on_elevation(self, instance, value):
-        if abs(value) > 6:
+        if abs(value) > 5:
             raise ValueError("Elvation must be between 5 and -5(inclusive)")
         self.pixel_depth = self.elevation_to_pixels(value)
         self._create_shadow()

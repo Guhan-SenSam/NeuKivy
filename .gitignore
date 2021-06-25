@@ -30,3 +30,4 @@ temp
 .pytest_cache
 .coverage
 .DS_Store
+test.py

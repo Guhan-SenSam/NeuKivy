@@ -1,10 +1,9 @@
 from kivy.app import App
-from kivy.logger import Logger
-from kivy.properties import ObjectProperty, ListProperty, ColorProperty, BooleanProperty
 from kivy.event import EventDispatcher
-from kivy.clock import Clock
+from kivy.logger import Logger
+from kivy.properties import BooleanProperty, ColorProperty, ListProperty, ObjectProperty
 from neukivy.kivymdconfig import factory_register
-import pip
+from neukivy.uix.behaviors.themeablebehavior import ThemeableBehavior
 
 
 class Theme_Manger(EventDispatcher):
@@ -85,35 +84,6 @@ class Theme_Manger(EventDispatcher):
             )
         self._bg_color_noalp = [self.bg_color[0], self.bg_color[1], self.bg_color[2], 0]
         self._bg_color_alp = [self.bg_color[0], self.bg_color[1], self.bg_color[2], 1]
-
-
-class ThemeableBehavior(EventDispatcher):
-
-    theme_manager = ObjectProperty()
-    """
-    Theme Manager object that contains all the default color values of the app instance.
-    If a widget does not define its own color values it will automatically use the app defaults.
-    It is suggested to not customize the color for each component as this will ruin the neumorphic style.
-    """
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.theme_manager = App.get_running_app().theme_manager
-        Clock.schedule_once(self.color_setter, -1)
-
-    def color_setter(self, *args):
-        """
-        Sets the color properties of a widget to the app defaults if no color properties
-        for that widget are provided.
-        """
-        if self.comp_color == [0, 0, 0, 0]:
-            self.comp_color = self.theme_manager._bg_color_alp
-        if self.dark_color == [0, 0, 0, 0]:
-            self.dark_color = self.theme_manager.dark_color
-        if self.light_color == [0, 0, 0, 0]:
-            self.light_color = self.theme_manager.light_color
-        if self.text_color == [0, 0, 0, 0]:
-            self.text_color = self.theme_manager.text_color
 
 
 class NeuApp(App):

@@ -10,13 +10,13 @@ Screen:
         Rectangle:
             size:self.size
             pos:self.pos
-    NeuIconButtonCircular:
+    NeuCircularIconButton:
         id:button
         pos_hint:{'center_x':.7,'center_y':.5}
         size:100,100
         icon:'account-alert'
         font_size:'40sp'
-    NeuButtonCircular:
+    NeuCircularButton:
         pos_hint:{'center_x':.3,'center_y':.5}
         text:'NeuKivy'
         radius:200
