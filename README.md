@@ -29,3 +29,19 @@ There is a temporary examples directory that contains some code to help you unde
 3. All the properties have doc strings explaining what they do.
 
 3. I would love for your feedback and any ideas that you have for NeuKivy!
+
+# Widgets Available
+1. Button
+    - Rectangular
+    - Rounded Rectangle
+    - Circular
+2. Icon Button
+    - Rectangular
+    - Rounded Rectangle
+    - Circular
+3. Icon With Text Button
+    - Rectangular
+    - Rounded Rectangle
+    (Can choose which side icon appears)
+    
+4. Card
