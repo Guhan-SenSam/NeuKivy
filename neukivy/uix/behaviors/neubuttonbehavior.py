@@ -62,6 +62,8 @@ class NeuButtonBehavior:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.register_event_type("on_press")
+        self.register_event_type("on_release")
         Clock.schedule_once(self.elevation_setter, 0)
 
     def elevation_setter(self, *args):
@@ -71,6 +73,7 @@ class NeuButtonBehavior:
         if self.collide_point(*touch.pos) and not self.disabled:
             self.pressed = True
             self.elev = self.down_elevation
+            self.dispatch("on_press")
             if "label" in self.ids and self.do_text_shrink:
                 self.ids.label.font_size = (
                     self.ids.label.font_size - self.text_shrink_amount
@@ -80,7 +83,14 @@ class NeuButtonBehavior:
         if self.pressed and not self.disabled:
             self.elev = self.up_elevation
             self.pressed = False
+            self.dispatch("on_release")
             if "label" in self.ids and self.do_text_shrink:
                 self.ids.label.font_size = (
                     self.ids.label.font_size + self.text_shrink_amount
                 )
+
+    def on_press(self, *args):
+        pass
+
+    def on_release(self, *args):
+        pass
