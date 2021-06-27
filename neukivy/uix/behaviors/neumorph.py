@@ -93,20 +93,6 @@ class NeuMorphRectangle:
     1 and 3 or between -4 to -2 for the best effect.
     """
 
-    elevation_data = {
-        -1: 10,
-        -2: 20,
-        -3: 30,
-        -4: 40,
-        -5: 50,
-        0: 0,
-        1: 10,
-        2: 20,
-        3: 30,
-        4: 40,
-        5: 50,
-    }
-
     pixel_depth = NumericProperty(0)
     """
     Internal property that is used to calculate how far shadows are shifted.
@@ -256,11 +242,8 @@ class NeuMorphRectangle:
     def on_elevation(self, instance, value):
         if abs(value) > 5:
             raise ValueError("Elevation must be between 5 and -5(inclusive)")
-        self.pixel_depth = self.elevation_to_pixels(value)
+        self.pixel_depth = abs(value * 10)
         self._create_shadow()
-
-    def elevation_to_pixels(self, elevation):
-        return self.elevation_data[elevation]
 
 
 class NeuMorphRoundedRectangle:
@@ -354,20 +337,6 @@ class NeuMorphRoundedRectangle:
     down at values higher than this. It is suggested to keep the elevation of a widget between
     1 and 3 or between -4 to -2 for the best effect.
     """
-
-    elevation_data = {
-        -1: 10,
-        -2: 20,
-        -3: 30,
-        -4: 40,
-        -5: 50,
-        0: 0,
-        1: 10,
-        2: 20,
-        3: 30,
-        4: 40,
-        5: 50,
-    }
 
     pixel_depth = NumericProperty(0)
     """
@@ -496,7 +465,7 @@ class NeuMorphRoundedRectangle:
         # Create blank Image
         outline = Image.new(
             "RGBA",
-            (size_x, size_y),
+            (int(size_x), int(size_y)),
             color=tuple(dec_2_rgb(self.theme_manager._bg_color_noalp)),
         )
         blank_draw = ImageDraw.Draw(outline)
@@ -521,11 +490,8 @@ class NeuMorphRoundedRectangle:
     def on_elev(self, instance, value):
         if abs(value) > 5:
             raise ValueError("Elevation must be between 5 and -5(inclusive)")
-        self.pixel_depth = self.elevation_to_pixels(value)
+        self.pixel_depth = abs(value * 10)
         self._create_shadow()
-
-    def elevation_to_pixels(self, elevation):
-        return self.elevation_data[elevation]
 
 
 class NeuMorphCircular:
@@ -619,20 +585,6 @@ class NeuMorphCircular:
     down at values higher than this. It is suggested to keep the elevation of a widget between
     1 and 3 or between -4 to -2 for the best effect.
     """
-
-    elevation_data = {
-        -1: 10,
-        -2: 20,
-        -3: 30,
-        -4: 40,
-        -5: 50,
-        0: 0,
-        1: 10,
-        2: 20,
-        3: 30,
-        4: 40,
-        5: 50,
-    }
 
     pixel_depth = NumericProperty(0)
     """
@@ -783,8 +735,4 @@ class NeuMorphCircular:
     def on_elevation(self, instance, value):
         if abs(value) > 5:
             raise ValueError("Elevation must be between 5 and -5(inclusive)")
-        self.pixel_depth = self.elevation_to_pixels(value)
-        self._create_shadow()
-
-    def elevation_to_pixels(self, elevation):
-        return self.elevation_data[elevation]
+        self.pixel_depth = abs(value * 10)

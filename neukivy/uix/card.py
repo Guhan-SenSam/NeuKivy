@@ -6,7 +6,7 @@ from neukivy.uix.behaviors.neumorph import NeuMorphRoundedRectangle
 from neukivy.uix.behaviors.themeablebehavior import ThemeableBehavior
 
 Builder.load_string(
-"""
+    """
 <NeuCard>:
     canvas.before:
         Clear
@@ -30,8 +30,6 @@ Builder.load_string(
             radius:self.radius,self.radius,self.radius,self.radius
             texture:self.border_texture if self.elevation and self.elevation < 0 else None
         Color:
-    size_hint:None,None
-    size:200,200
 
 
 
@@ -39,7 +37,7 @@ Builder.load_string(
 )
 
 
-class NeuCard(ThemeableBehavior,NeuMorphRoundedRectangle,BoxLayout):
+class NeuCard(ThemeableBehavior, NeuMorphRoundedRectangle, BoxLayout):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -64,8 +62,7 @@ class NeuCard(ThemeableBehavior,NeuMorphRoundedRectangle,BoxLayout):
     This widget has a default elevation of 3
     """
 
-
-    def __init__(self,**kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Clock.schedule_once(lambda x: self.set_elevation(self.elevation))
 
@@ -74,3 +71,6 @@ class NeuCard(ThemeableBehavior,NeuMorphRoundedRectangle,BoxLayout):
             self.elev = 3
         else:
             self.elev = value
+
+    def on_elevation(self, value, *args):
+        self.elev = self.elevation
