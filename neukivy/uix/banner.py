@@ -2,12 +2,12 @@ from kivy.animation import Animation
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import (
+    BooleanProperty,
     ColorProperty,
     ListProperty,
     NumericProperty,
     ObjectProperty,
     StringProperty,
-    BooleanProperty,
 )
 from kivy.uix.boxlayout import BoxLayout
 from neukivy.uix.behaviors.themeablebehavior import ThemeableBehavior
