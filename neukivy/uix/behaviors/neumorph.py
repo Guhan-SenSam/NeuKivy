@@ -233,13 +233,33 @@ class NeuMorphRectangle:
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
         return texture
 
+    def _update_pos(self, *args):
+        if self.elev and self.elev > 0:
+            self.dark_shadow_pos = (
+                self.x - self.increment,
+                self.y - self.pixel_depth / 2 - self.increment,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment,
+                self.y - self.increment,
+            )
+        else:
+            self.dark_shadow_pos = (
+                self.x - self.pixel_depth / 2 + self.increment / 2,
+                self.y - self.pixel_depth / 2 - self.increment / 2,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment / 2,
+                self.y - self.pixel_depth / 2 + self.increment / 2,
+            )
+
     def on_size(self, *args, **kwargs):
         self._create_shadow()
 
     def on_pos(self, *args, **kwargs):
-        self._create_shadow()
+        self._update_pos()
 
-    def on_elevation(self, instance, value):
+    def on_elev(self, instance, value):
         if abs(value) > 5:
             raise ValueError("Elevation must be between 5 and -5(inclusive)")
         self.pixel_depth = abs(value * 10)
@@ -481,11 +501,31 @@ class NeuMorphRoundedRectangle:
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
         return texture
 
+    def _update_pos(self, *args):
+        if self.elev and self.elev > 0:
+            self.dark_shadow_pos = (
+                self.x - self.increment,
+                self.y - self.pixel_depth / 2 - self.increment,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment,
+                self.y - self.increment,
+            )
+        else:
+            self.dark_shadow_pos = (
+                self.x - self.pixel_depth / 2 + self.increment / 2,
+                self.y - self.pixel_depth / 2 - self.increment / 2,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment / 2,
+                self.y - self.pixel_depth / 2 + self.increment / 2,
+            )
+
     def on_size(self, *args, **kwargs):
         self._create_shadow()
 
     def on_pos(self, *args, **kwargs):
-        self._create_shadow()
+        self._update_pos()
 
     def on_elev(self, instance, value):
         if abs(value) > 5:
@@ -726,13 +766,34 @@ class NeuMorphCircular:
         texture.blit_buffer(outline.tobytes(), colorfmt="rgba", bufferfmt="ubyte")
         return texture
 
+    def _update_pos(self, *args):
+        if self.elev and self.elev > 0:
+            self.dark_shadow_pos = (
+                self.x - self.increment,
+                self.y - self.pixel_depth / 2 - self.increment,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment,
+                self.y - self.increment,
+            )
+        else:
+            self.dark_shadow_pos = (
+                self.x - self.pixel_depth / 2 + self.increment / 2,
+                self.y - self.pixel_depth / 2 - self.increment / 2,
+            )
+            self.light_shadow_pos = (
+                self.x - self.pixel_depth / 2 - self.increment / 2,
+                self.y - self.pixel_depth / 2 + self.increment / 2,
+            )
+
     def on_size(self, *args, **kwargs):
         self._create_shadow()
 
     def on_pos(self, *args, **kwargs):
-        self._create_shadow()
+        self._update_pos()
 
-    def on_elevation(self, instance, value):
+    def on_elev(self, instance, value):
         if abs(value) > 5:
             raise ValueError("Elevation must be between 5 and -5(inclusive)")
         self.pixel_depth = abs(value * 10)
+        self._create_shadow()
