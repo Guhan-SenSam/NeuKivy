@@ -17,6 +17,7 @@ class ThemeableBehavior(EventDispatcher):
         self.theme_manager = App.get_running_app().theme_manager
         self.color_setter()
         super().__init__(**kwargs)
+        Clock.schedule_once(self.color_setter, -1)
 
     def color_setter(self, *args):
         """
