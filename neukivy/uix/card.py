@@ -63,8 +63,9 @@ class NeuCard(ThemeableBehavior, BoxLayout, NeuMorphRoundedRectangle):
     """
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
         self.elev = self.elevation
+        super().__init__(**kwargs)
+        Clock.schedule_once(self.on_elevation)
 
     def on_elevation(self, *args):
         if self.elevation is None:

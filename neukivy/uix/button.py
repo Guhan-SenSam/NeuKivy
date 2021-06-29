@@ -67,9 +67,9 @@ Builder.load_string(
             size:self.dark_shadow_size
             pos:self.dark_shadow_pos
             texture:self.dark_shadow
-    size:100,100
     size_hint:None,None
     width:self.minimum_width
+    height:self.minimum_height
     Label:
         id:label
         text:root.text
@@ -332,7 +332,7 @@ class NeuIconTextBaseButton(NeuButtonBehavior, BoxLayout, ThemeableBehavior):
     and defaults to `"10dp"`.
     """
 
-    icon_pos = OptionProperty("Right", options=["Right", "Left"])
+    icon_pos = OptionProperty("right", options=["right", "left", "top", "bottom"])
 
     def on_icon(self, *args):
         if self.icon_font_name == "Icons":
@@ -342,18 +342,34 @@ class NeuIconTextBaseButton(NeuButtonBehavior, BoxLayout, ThemeableBehavior):
                 raise KeyError("The icon '" + self.icon + "' does not exist")
 
     def on_icon_pos(self, *args):
-        if self.icon_pos == "Right":
+        if self.icon_pos == "right":
             label = self.ids.label
             icon = self.ids.icon
+            self.orientation = "horizontal"
             self.clear_widgets()
             self.add_widget(label)
             self.add_widget(icon)
+        elif self.icon_pos == "left":
+            label = self.ids.label
+            icon = self.ids.icon
+            self.orientation = "horizontal"
+            self.clear_widgets()
+            self.add_widget(icon)
+            self.add_widget(label)
+        elif self.icon_pos == "top":
+            label = self.ids.label
+            icon = self.ids.icon
+            self.orientation = "vertical"
+            self.clear_widgets()
+            self.add_widget(icon)
+            self.add_widget(label)
         else:
             label = self.ids.label
             icon = self.ids.icon
+            self.orientation = "vertical"
             self.clear_widgets()
-            self.add_widget(icon)
             self.add_widget(label)
+            self.add_widget(icon)
 
 
 class NeuButton(NeuBaseButton, NeuMorphRectangle):
