@@ -37,7 +37,7 @@ Builder.load_string(
 )
 
 
-class NeuCard(ThemeableBehavior, NeuMorphRoundedRectangle, BoxLayout):
+class NeuCard(ThemeableBehavior, BoxLayout, NeuMorphRoundedRectangle):
 
     comp_color = ListProperty([0, 0, 0, 0])
 
@@ -64,13 +64,10 @@ class NeuCard(ThemeableBehavior, NeuMorphRoundedRectangle, BoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        Clock.schedule_once(lambda x: self.set_elevation(self.elevation))
+        self.elev = self.elevation
 
-    def set_elevation(self, value):
-        if value is None:
+    def on_elevation(self, *args):
+        if self.elevation is None:
             self.elev = 3
         else:
-            self.elev = value
-
-    def on_elevation(self, value, *args):
-        self.elev = self.elevation
+            self.elev = self.elevation
