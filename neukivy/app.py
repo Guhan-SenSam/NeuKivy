@@ -58,7 +58,7 @@ class Theme_Manger(EventDispatcher):
     and defaults to `[0,0,0,0]`.
     """
 
-    text_color = ColorProperty([1, 1, 1, 1])
+    text_color = ColorProperty([0, 0, 0, 0])
     """
     Color of text used in the app.
 
