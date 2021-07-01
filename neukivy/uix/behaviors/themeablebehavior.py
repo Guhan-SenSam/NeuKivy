@@ -24,11 +24,11 @@ class ThemeableBehavior(EventDispatcher):
         Sets the color properties of a widget to the app defaults if no color properties
         for that widget are provided.
         """
-        if self.comp_color == [0, 0, 0, 0]:
+        if hasattr(self, "comp_color") and self.comp_color == [0, 0, 0, 0]:
             self.comp_color = self.theme_manager._bg_color_alp
-        if self.dark_color == [0, 0, 0, 0]:
+        if hasattr(self, "dark_color") and self.dark_color == [0, 0, 0, 0]:
             self.dark_color = self.theme_manager.dark_color
-        if self.light_color == [0, 0, 0, 0]:
+        if hasattr(self, "light_color") and self.light_color == [0, 0, 0, 0]:
             self.light_color = self.theme_manager.light_color
         if hasattr(self, "text_color") and self.text_color == [0, 0, 0, 0]:
             self.text_color = self.theme_manager.text_color

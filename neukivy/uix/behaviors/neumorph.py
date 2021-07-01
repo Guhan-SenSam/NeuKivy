@@ -533,6 +533,9 @@ class NeuMorphRoundedRectangle:
         self.pixel_depth = abs(value * 10)
         self._create_shadow()
 
+    def on_radius(self, instance, value):
+        self._create_shadow()
+
 
 class NeuMorphCircular:
     """

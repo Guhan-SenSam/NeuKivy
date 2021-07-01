@@ -53,7 +53,7 @@ class NeuCard(ThemeableBehavior, BoxLayout, NeuMorphRoundedRectangle):
     and defaults to `'20dp'`.
     """
 
-    elevation = NumericProperty(None)
+    elevation = NumericProperty(3)
     """
     Elevation of the widget.Elevation can be any number between -5 and +5(inclusive).
     Negative elevation will cause the widget to go into the screen whereas positive
@@ -63,12 +63,9 @@ class NeuCard(ThemeableBehavior, BoxLayout, NeuMorphRoundedRectangle):
     """
 
     def __init__(self, **kwargs):
-        self.elev = self.elevation
         super().__init__(**kwargs)
-        Clock.schedule_once(self.on_elevation)
+        Clock.schedule_once(self.elevation_set)
 
-    def on_elevation(self, *args):
-        if self.elevation is None:
-            self.elev = 3
-        else:
-            self.elev = self.elevation
+    def elevation_set(self, *args):
+        self.elev = self.elevation
+        self.bind(elevation=self.elevation_set)
