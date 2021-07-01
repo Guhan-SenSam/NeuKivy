@@ -53,14 +53,14 @@ To sum everything up. NeuKivy can run on android as long as you don't animate a 
     - Rounded Rectangle
     - Circular
 
-      ![buttons1](https://github.com/Guhan-SenSam/NeuKivy/blob/main/images/button1.png)
+      ![buttons1](https://github.com/Guhan-SenSam/NeuKivy/blob/main/images/buttons1.png)
 3. Icon With Text Button
 
     (Can choose which side icon appears)
     - Rectangular
     - Rounded Rectangle
     
-      ![buttons2](https://github.com/Guhan-SenSam/NeuKivy/blob/main/images/button2.png)
+      ![buttons2](https://github.com/Guhan-SenSam/NeuKivy/blob/main/images/buttons2.png)
 
 4. Card
 
