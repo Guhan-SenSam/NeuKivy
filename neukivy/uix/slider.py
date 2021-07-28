@@ -56,7 +56,7 @@ Builder.load_string(
         size_hint: None, None
         size:root.height-root.thumb_padding,root.height-root.thumb_padding
         pos:root.value_pos[0]-self.width/2,root.center_y - self.height / 2
-        behind_color: root._comp_color if root.thumb_bg_color==[0,0,0,0] else root.thumb_bg_color
+        behind_color: root.comp_color[0:3] +[0,] if root.thumb_bg_color==[0,0,0,0] else root.thumb_bg_color
         glow_color: root.thumb_color if root.glow_color==[0,0,0,0] else root.glow_color
 
 
@@ -133,8 +133,6 @@ class NeuSlider(ThemeableBehavior, Slider, NeuMorphRoundedRectangle):
     and defaults to '20'.
     """
 
-    _comp_color = ColorProperty()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Clock.schedule_once(self.elevation_set)
@@ -145,11 +143,6 @@ class NeuSlider(ThemeableBehavior, Slider, NeuMorphRoundedRectangle):
 
     def radius_set(self, *args):
         self.radius = self.height / 2
-
-    def on_comp_color(self, *args):
-        self._comp_color = self.comp_color[0:3] + [
-            0,
-        ]
 
 
 class NeuThumb(ThemeableBehavior, Thumb, NeuGlowCircular):
