@@ -16,6 +16,8 @@ Make sure you are running the latest version (8.2.0)
 pip install --upgrade git+git://github.com/Guhan-SenSam/NeuKivy.git
 ```
 
+## Support
+![Discord](https://discord.com/channels/943755643741933618/943789595055779850)
 ## Usage
 
 There is a temporary examples directory that contains some code to help you understand the basic properties of NeuKivy better.
